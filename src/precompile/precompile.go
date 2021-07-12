@@ -1,6 +1,7 @@
 package precompile
 
 import (
+	"math"
 	"strings"
 	"xx/file"
 	"xx/load"
@@ -34,8 +35,8 @@ func GetSources(paths []string) []TargetFile {
 func getAbsPath(rootPath string, filePath string, moduleName string) string {
 	prefix := ``
 	temp := filePath[len(rootPath):]
-	count := strings.Count(temp, "\\")
-	for i := 0; i < count-1; i++ {
+	count := int(math.Floor(float64(strings.Count(temp, "\\")) / 2))
+	for i := 0; i < count; i++ {
 		prefix += `../`
 	}
 	return prefix + "modules/" + moduleName + ".js"

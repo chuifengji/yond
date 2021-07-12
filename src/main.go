@@ -11,14 +11,14 @@ import (
 func init() {
 	content := file.ReadFile("../test/temp/js.mod")
 	matches := util.Re_Js_Mod.FindAllString(content, -1)
-	util.RootPath = `D:\Adocs\all-docs\MyOpenSource\xxx\test\temp`
+	util.RootPath = `D:\Adocs\all-docs\MyOpenSource\xxx\test`
 	for _, value := range matches {
 		util.SetModuleUrl[util.Re_between_quotation.FindString(value)] = true
 	}
 }
 
 func main() {
-	file.CloneDir(`../test`)
+	file.CloneDir(util.RootPath)
 	matchPaths := file.GetFiles(util.RootPath)
 	fmt.Println(matchPaths)
 	targetFiles := precompile.GetSources(matchPaths)

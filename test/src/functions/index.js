@@ -1,2 +1,2 @@
-import A from "http://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-import B from "http://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"
+import A from "../modules/_axios_0_21_1.js"
+import B from "../modules/_react_17_0_2.js"
