@@ -1,8 +1,8 @@
 package funcs
 
 import (
-	"xx/file"
-	"xx/precompile"
+	"yond/file"
+	"yond/precompile"
 )
 
 func Init() {

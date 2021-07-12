@@ -3,9 +3,9 @@ package precompile
 import (
 	"math"
 	"strings"
-	"xx/file"
-	"xx/load"
-	"xx/util"
+	"yond/file"
+	"yond/load"
+	"yond/util"
 )
 
 // var result []string

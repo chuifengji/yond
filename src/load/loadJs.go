@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"xx/file"
-	"xx/util"
+	"yond/file"
+	"yond/util"
 )
 
 //实际上仅仅在第一次初始化时用，后面判断应该从 js.mod 文件中读取
