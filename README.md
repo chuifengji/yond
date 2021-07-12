@@ -1,6 +1,7 @@
 
 ### 先写个基本框架，能跑起来就行，有空再写了
 
+### Steps：
 1. 拷贝整个src目录 到 temp 目录 
 2. GetFiles return []filePath, isDir -> return
 3. readFile 单个文件 is js/ts ? go on
