@@ -47,7 +47,7 @@ func TransformHttpImport(sources []TargetFile) {
 	for i := 0; i < len(sources); i++ {
 		var content = sources[i].Source
 		var filePath = sources[i].Path
-		import_matches := util.Re_http_import.FindAllString(content, -1)
+		import_matches := append(util.Re_http_import.FindAllString(content, -1), util.Re_http_rquire.FindAllString(content, -1)...)
 		//var http_matches []string
 		for _, value := range import_matches {
 			//exp. 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js'
