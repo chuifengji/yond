@@ -4,7 +4,7 @@
 
 npm 什么的，最讨厌了！
 
-主要是对 http import 这种语法进行预编译转换， 摆脱 npm install 和 node_modules
+主要是对 http import 和 http require 这种非规范语法进行预编译转换， 摆脱 npm install 和 node_modules
 
 ### Usage
 
