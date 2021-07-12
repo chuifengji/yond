@@ -19,7 +19,7 @@ func init() {
 
 func main() {
 	file.CloneDir(util.RootPath)
-	matchPaths := file.GetFiles(util.RootPath)
+	matchPaths := file.GetFiles(util.RootPath + "\\temp")
 	fmt.Println(matchPaths)
 	targetFiles := precompile.GetSources(matchPaths)
 	precompile.TransformHttpImport(targetFiles)
