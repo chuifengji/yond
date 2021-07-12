@@ -2,6 +2,7 @@
 package main
 
 import (
+	"fmt"
 	"xx/file"
 	"xx/precompile"
 	"xx/util"
@@ -10,6 +11,7 @@ import (
 func init() {
 	content := file.ReadFile("../test/temp/js.mod")
 	matches := util.Re_Js_Mod.FindAllString(content, -1)
+	util.RootPath = `D:\Adocs\all-docs\MyOpenSource\xxx\test\temp`
 	for _, value := range matches {
 		util.SetModuleUrl[util.Re_between_quotation.FindString(value)] = true
 	}
@@ -17,8 +19,8 @@ func init() {
 
 func main() {
 	file.CloneDir(`../test`)
-	matchPaths := file.GetFiles(`../test/temp`)
-	// fmt.Println(matchPaths)
+	matchPaths := file.GetFiles(util.RootPath)
+	fmt.Println(matchPaths)
 	targetFiles := precompile.GetSources(matchPaths)
 	precompile.TransformHttpImport(targetFiles)
 }

@@ -31,10 +31,21 @@ func GetSources(paths []string) []TargetFile {
 	return targetFiles
 }
 
+func getAbsPath(rootPath string, filePath string, moduleName string) string {
+	prefix := ``
+	temp := filePath[len(rootPath):]
+	count := strings.Count(temp, "\\")
+	for i := 0; i < count-1; i++ {
+		prefix += `../`
+	}
+	return prefix + "modules/" + moduleName + ".js"
+}
+
 func TransformHttpImport(sources []TargetFile) {
 
 	for i := 0; i < len(sources); i++ {
 		var content = sources[i].Source
+		var filePath = sources[i].Path
 		import_matches := util.Re_http_import.FindAllString(content, -1)
 		//var http_matches []string
 		for _, value := range import_matches {
@@ -44,7 +55,7 @@ func TransformHttpImport(sources []TargetFile) {
 			httpUrl = strings.Replace(strings.Replace(httpUrl, `'`, "", -1), `"`, "", -1)
 			var moduleName = GetModuleName(httpUrl)
 			//replace url to moduleName
-			content = strings.Replace(content, httpUrl, "modules/"+moduleName+".js", -1)
+			content = strings.Replace(content, httpUrl, getAbsPath(util.RootPath, filePath, moduleName), -1)
 			//distribute a http task
 			load.DistributeHttpTask(moduleName, httpUrl)
 			//http_matches = append(http_matches, httpUrl)
