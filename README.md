@@ -1,5 +1,7 @@
 
-### 先写个基本框架，能跑起来就行，有空再写了
+### 利用 http import 拜托 npm install 和 node_modules
+
+先写个基本框架，能跑起来就行，有空再写了
 
 ### Steps：
 1. 拷贝整个src目录 到 temp 目录 
