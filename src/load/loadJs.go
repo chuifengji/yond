@@ -32,11 +32,11 @@ func createHttpTask(moduleName string, url string) {
 }
 
 func addToModules(moduleName string, content string, url string) {
-	if !file.Exists("../test/temp/modules") {
-		file.CreateDir("../test/temp/modules")
+	if !file.Exists(util.RootPath + `\dev\modules`) {
+		file.CreateDir(util.RootPath + `\dev\modules`)
 	}
-	if !file.Exists("../test/temp/modules/" + moduleName + ".js") {
-		file.WriteFile("../test/temp/modules/"+moduleName+".js", content)
+	if !file.Exists(util.RootPath + `\dev\modules\` + moduleName + ".js") {
+		file.WriteFile(util.RootPath+`\dev\modules\`+moduleName+".js", content)
 		file.AppendToJsMod(url)
 	}
 

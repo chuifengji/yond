@@ -3,24 +3,64 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"xx/file"
-	"xx/precompile"
+	"xx/funcs"
 	"xx/util"
+
+	"github.com/urfave/cli/v2"
 )
 
-func init() {
-	content := file.ReadFile("../test/temp/js.mod")
+func initSelf(rootPath string) {
+	util.RootPath = rootPath
+	content := file.ReadFile(rootPath + `\dev\js.mod`)
 	matches := util.Re_Js_Mod.FindAllString(content, -1)
-	util.RootPath = `D:\Adocs\all-docs\MyOpenSource\xxx\test`
 	for _, value := range matches {
 		util.SetModuleUrl[util.Re_between_quotation.FindString(value)] = true
 	}
 }
 
 func main() {
-	file.CloneDir(util.RootPath)
-	matchPaths := file.GetFiles(util.RootPath + "\\temp")
-	fmt.Println(matchPaths)
-	targetFiles := precompile.GetSources(matchPaths)
-	precompile.TransformHttpImport(targetFiles)
+	app := cli.NewApp()
+	app.EnableBashCompletion = true
+	app.Commands = []*cli.Command{
+		{
+			Name:    "init",
+			Aliases: []string{"i"},
+			Usage:   "init a yond project",
+			Action: func(c *cli.Context) error {
+				rootPath, _ := os.Getwd()
+				initSelf(rootPath)
+				funcs.Init()
+				return nil
+			},
+		},
+		{
+			Name:    "dev",
+			Aliases: []string{"d"},
+			Usage:   "transform http import and create dev directory",
+			Action: func(c *cli.Context) error {
+				rootPath, _ := os.Getwd()
+				initSelf(rootPath)
+				funcs.BuildDev(rootPath)
+				return nil
+			},
+		},
+		{
+			Name:    "build",
+			Aliases: []string{"b"},
+			Usage:   "build and create dist directory",
+			Action: func(c *cli.Context) error {
+				rootPath, _ := os.Getwd()
+				initSelf(rootPath)
+				fmt.Println("build with esbuild", c.Args().First())
+				return nil
+			},
+		},
+	}
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

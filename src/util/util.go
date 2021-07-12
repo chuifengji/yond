@@ -1,6 +1,8 @@
 package util
 
-import "regexp"
+import (
+	"regexp"
+)
 
 var Re_http_import = regexp.MustCompile(`import(\s+\w+)(\sfrom\s+)(['"](http|https)://[\w.]+\/?\S*['"])`)
 var Re_between_quotation = regexp.MustCompile(`['"](.*?)['"]`)

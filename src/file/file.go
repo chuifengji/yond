@@ -41,16 +41,18 @@ func WriteFile(path string, content string) {
 }
 
 func CloneDir(path string) {
-	if Exists(path + "/temp") {
+	fmt.Println(path)
+	if Exists(path + "\\dev") {
 		return
 	}
-	err := copy.Copy(path+"/src", path+"/temp")
+	err := copy.Copy(path+"\\src", path+"\\dev")
 	if err != nil {
 		log.Println(err)
 	}
 }
 
 func GetFiles(rootPath string) []string {
+	fmt.Println(rootPath)
 	var result []string
 	usefulSuffix := []string{".js", ".ts"}
 	err := filepath.Walk(rootPath, func(filePath string, info os.FileInfo, err error) error {
@@ -73,7 +75,7 @@ func GetFiles(rootPath string) []string {
 }
 
 func AppendToJsMod(url string) {
-	filePath := "../test/temp" + "/js.mod"
+	filePath := util.RootPath + "/js.mod"
 	if !Exists(filePath) {
 		_, err := os.Create(filePath)
 		if err != nil {
