@@ -20,6 +20,8 @@ go get github.com/chuifengji/yond/v1 (还没发布呢)
 
 将 http import 转换到本地的 modules 目录下 
 
+就是 test 文件中 src -> dev
+
 `yond build` 
 
 接入 esbuild 进行进一步的代码转换 
